@@ -23,7 +23,7 @@ RUN features.sh
 
 COPY --chown=1001:0 jvm.options /config/jvm.options
 COPY --chown=1001:0 server/target/server-1.0-SNAPSHOT.war /config/apps/looper.war
-COPY --chown=1001:0 client/target/client-1.0-SNAPSHOT.jar /loopctl.jar
+COPY --chown=1001:0 client/target/client-1.0-SNAPSHOT-jar-with-dependencies.jar /loopctl.jar
 COPY --chown=1001:0 *.p12 /config/resources/security/
 COPY --chown=1001:0 keystore.xml /config/configDropins/defaults/keystore.xml
 COPY --chown=1001:0 client/loopctl.sh /loopctl.sh
