@@ -8,6 +8,11 @@ import java.net.HttpURLConnection;
 import java.net.URL;
 import java.util.Base64;
 
+import com.google.gson.JsonArray;
+import com.google.gson.JsonObject;
+import com.google.gson.JsonParser;
+
+
 public class LooperController implements Runnable {
 	private int iteration = 0;
 	private int count = 0;
@@ -51,6 +56,43 @@ public class LooperController implements Runnable {
 
 		//don't let the JVM exit until all the spawned threads complete
 		while (completed<threads) Thread.sleep(1000);
+		try {
+			LooperController lc = new LooperController(url, threads, times, id, pwd);
+			lc.validateLoop();
+		} catch (Throwable t) {
+			t.printStackTrace();
+		}
+	}
+
+	private boolean validateLoop() throws IOException {
+
+		// comparison values
+		final int ENTRIES = count*5; //constant 5 comes from 5 stock trades per iteration
+
+		boolean err = false;
+
+		for (int index=1; index<=iteration; index++) {
+			String res = invokeREST("GET", "http://trade-history-route-stocktrader-rs.devops-dev1-a01ee4194ed985a1e32b1d96fd4ae346-0000.us-east.containers.appdomain.cloud/trade-history/trades/Looper" + index);
+			JsonArray transactionsList = JsonParser.parseString(res).getAsJsonObject().get("transactions").getAsJsonArray();
+			int looperPurchaseCount = transactionsList.size();
+			if (looperPurchaseCount != ENTRIES) {
+				if (!err) err = true;
+				System.out.println("Looper" + index + " had " + looperPurchaseCount + " stock purchases recorded, but should have " + ENTRIES + " purchases recorded");
+			}
+			for (String stock : new String[]{"IBM", "AAPL", "GOOG"}) {
+				res = invokeREST("GET", "http://trade-history-route-stocktrader-rs.devops-dev1-a01ee4194ed985a1e32b1d96fd4ae346-0000.us-east.containers.appdomain.cloud/trade-history/trades/Looper" + index + "/" + stock);
+				transactionsList = JsonParser.parseString(res).getAsJsonObject().get("transactions").getAsJsonArray();
+				int looperStockPurchaseCount = transactionsList.size();
+				double factor = 0.4;
+				if (stock.equals("AAPL")) factor = 0.2;
+				if (looperStockPurchaseCount != (int) ENTRIES*factor) {
+					if (!err) err = true;
+					System.out.println("Looper" + index + " had " + looperStockPurchaseCount + " " + stock + " stock purchases recorded, but should have " + (int) ENTRIES*factor + " purchases recorded");
+				}
+			}
+		}
+
+		return !err; // returns true if there are no errors in the loop
 	}
 
 	private String invokeREST(String verb, String uri) throws IOException {
