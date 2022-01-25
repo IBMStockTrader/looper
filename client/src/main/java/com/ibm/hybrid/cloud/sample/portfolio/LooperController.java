@@ -1,5 +1,9 @@
 package com.ibm.hybrid.cloud.sample.portfolio;
 
+import com.ibm.hybrid.cloud.sample.portfolio.pojo.LoopResult;
+import com.ibm.hybrid.cloud.sample.portfolio.tasks.FlatLoopTask;
+import com.ibm.hybrid.cloud.sample.portfolio.tasks.LegacyLoopTask;
+
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;

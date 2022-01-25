@@ -1,4 +1,4 @@
-package com.ibm.hybrid.cloud.sample.portfolio;
+package com.ibm.hybrid.cloud.sample.portfolio.pojo;
 
 public class LoopResult {
     private long loopDuration = -1;

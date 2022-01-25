@@ -1,4 +1,6 @@
-package com.ibm.hybrid.cloud.sample.portfolio;
+package com.ibm.hybrid.cloud.sample.portfolio.tasks;
+
+import com.ibm.hybrid.cloud.sample.portfolio.pojo.LoopResult;
 
 import java.io.BufferedReader;
 import java.io.IOException;
