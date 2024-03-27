@@ -14,13 +14,14 @@
 #   limitations under the License.
 
 # FROM websphere-liberty:microProfile4
-FROM openliberty/open-liberty:23.0.0.12-full-java17-openj9-ubi
+FROM openliberty/open-liberty:24.0.0.3-full-java17-openj9-ubi
 
 USER root
 RUN echo 'cjot' | passwd --stdin root
 
-# Set up ping to work when kubectl exec'd into the pod (note you have to "su" once kubectl exec'd in, for it to work)
-RUN yum -y install iputils
+# Set up ping and nc to work when kubectl exec'd into the pod (note you have to "su" once kubectl exec'd in, for it to work)
+# Note I prefer nc over telnet, for security and other reasons - see https://geekflare.com/telnet-on-rhel/ for more info
+RUN yum -y install iputils nc
 
 COPY --chown=1001:0 config /config
 
