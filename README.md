@@ -43,7 +43,7 @@ gets installed into the Looper pod, alongside the `loopctl.sh` script.  Simple i
 prefix string, and it will iterate through all portfolios in the system and call the `delete` operation
 on any that start with the specified prefix.  Note that all portfolios created by Looper start with the
 string `Looper`, and all created by [Ryan's Gatling-based client](https://github.com/rtclauss/loopr)
-start with the string "gatling-".  So if you had to abort a Looper or Gatling run part way through for
+start with the string `gatling-`.  So if you had to abort a Looper or Gatling run part way through for
 whatever reason, and thus have a bunch of leftovers that didn't get the chance to be deleted at the end
 as usual, this script will clean those up, so you are ready for the next run.  It can be invoked (once
 `'kubectl exec`'d into the Looper pod) via `./cleanup.sh Looper` (or `./cleanup.sh gatling-`).
