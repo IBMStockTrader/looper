@@ -1,11 +1,28 @@
 /*
+       Copyright 2024 Kyndryl, All Rights Reserved
+
+   Licensed under the Apache License, Version 2.0 (the "License");
+   you may not use this file except in compliance with the License.
+   You may obtain a copy of the License at
+
+       http://www.apache.org/licenses/LICENSE-2.0
+
+   Unless required by applicable law or agreed to in writing, software
+   distributed under the License is distributed on an "AS IS" BASIS,
+   WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+   See the License for the specific language governing permissions and
+   limitations under the License.
+ */
+
+package com.ibm.hybrid.cloud.sample.portfolio;
+
+/*
 import io.jsonwebtoken.JwtBuilder;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;
 import io.jsonwebtoken.security.Keys;
 */
 
-import org.json.CDL;
 import org.json.JSONArray;
 import org.json.JSONObject;
 import org.json.JSONTokener;
@@ -20,6 +37,16 @@ import java.util.Base64;
 import java.util.Date;
 import java.util.Iterator;
 
+/** This class removes portfolios that start with the specified strings.  This is useful
+ *  if you have aborted a Looper or Gatling run, and thus have dozens, if not hundreds,
+ *  of portfolios that start with "Looper" or "gatling-".
+ *
+ *  Note I had tried to build the JWT required by Broker myself here, but couldn't get
+ *  it signed in a way that it would accept.  So I "cheated" and used a long-standing
+ *  debug operation available on the Looper servlet (that accepts being called via
+ *  basic-auth) that just returns a properly signed JWT, and pass that along to Broker
+ *  in the auth header.
+ */
 public class Cleanup {
 	private String basicAuth = null;
 	private String jwtAuth = null;
@@ -28,7 +55,6 @@ public class Cleanup {
 
 	public static void main(String[] args) {
 		if (args.length == 3) try {
-
 			System.out.print("User ID: ");
 			String id = System.console().readLine();
 
@@ -36,8 +62,8 @@ public class Cleanup {
 			String pwd = new String(System.console().readPassword());
 			System.out.println();
 
-	        String credentials = id + ":" + pwd;
-    	    String auth = "Basic " + Base64.getEncoder().encodeToString(credentials.getBytes());
+			String credentials = id + ":" + pwd;
+			String auth = "Basic " + Base64.getEncoder().encodeToString(credentials.getBytes());
 
 			Cleanup cleanup = new Cleanup(auth);
 			cleanup.getJWT(args[0]);
