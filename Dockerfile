@@ -31,7 +31,7 @@ COPY --chown=1001:0 config /config
 
 COPY --chown=1001:0 server/target/server-1.0-SNAPSHOT.war /config/apps/looper.war
 COPY --chown=1001:0 client/target/client-1.0-SNAPSHOT.jar /loopctl.jar
-COPY --chown=1001:0 client/target/prereqs/json-20240303.jar /json.jar
+COPY --chown=1001:0 client/target/prereqs/json-20250107.jar /json.jar
 COPY --chown=1001:0 client/loopctl.sh /loopctl.sh
 COPY --chown=1001:0 client/cleanup.sh /cleanup.sh
 
