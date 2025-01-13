@@ -1,5 +1,5 @@
 #       Copyright 2017-2021 IBM Corp All Rights Reserved
-#       Copyright 2022-2024 Kyndryl, All Rights Reserved
+#       Copyright 2022-2025 Kyndryl, All Rights Reserved
 
 #   Licensed under the Apache License, Version 2.0 (the "License");
 #   you may not use this file except in compliance with the License.
@@ -14,7 +14,7 @@
 #   limitations under the License.
 
 # FROM websphere-liberty:microProfile4
-FROM openliberty/open-liberty:24.0.0.9-full-java17-openj9-ubi
+FROM openliberty/open-liberty:24.0.0.12-full-java17-openj9-ubi
 
 USER root
 RUN echo 'cjot' | passwd --stdin root
