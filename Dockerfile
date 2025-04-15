@@ -14,7 +14,7 @@
 #   limitations under the License.
 
 # FROM websphere-liberty:microProfile4
-FROM openliberty/open-liberty:24.0.0.12-full-java17-openj9-ubi
+FROM openliberty/open-liberty:25.0.0.3-full-java17-openj9-ubi
 
 USER root
 RUN echo 'cjot' | passwd --stdin root
@@ -41,5 +41,5 @@ USER 1001
 
 #configure.sh will try to start the server, to build the shared class cache, unless you use the following line
 #normally that's fine, but if building an Intel (amd64) image on a Mac M1 (arm64), that will hang
-ARG OPENJ9_SCC=false
+ENV OPENJ9_SCC=false
 RUN configure.sh
