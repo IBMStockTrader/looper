@@ -4,7 +4,7 @@ metadata:
   name: stocktrader
   description: Stock Trader
 spec:
-  cd  owner: guests
+  owner: guests
 ---
 apiVersion: backstage.io/v1alpha1
 kind: API
