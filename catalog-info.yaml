@@ -13,7 +13,7 @@ spec:
   lifecycle: production
   owner: guests
   definition:
-    $text: src/main/generated/openapi/openapi.yaml
+    $text: server/src/main/generated/openapi/openapi.yaml
 metadata:
   name: looper-api
   tags:
