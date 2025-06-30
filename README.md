@@ -15,6 +15,7 @@
    limitations under the License.
 -->
 
+
 The *looper* microservice runs a dozen calls to *broker* REST APIs in a loop.  You can use this for
 performance and load testing.  It calls the *broker* service via the **mpRestClient** from
 **MicroProfile**, and builds and passes the **JWT** that it requires.
