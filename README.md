@@ -62,3 +62,5 @@ In practice this means you'll run something like:
 helm repo add ibm-charts https://raw.githubusercontent.com/IBM/charts/master/repo/stable/
 helm install ibm-charts/ibm-websphere-liberty -f manifests/looper-values.yaml -n looper --namespace stock-trader --tls
 ```
+
+

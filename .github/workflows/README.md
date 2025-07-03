@@ -2,7 +2,7 @@
 
 Workflows are used to build and deploy the service.
 
-This file describes the workflows that are used to compile the app, build the Docker image, and publish it to a container registry.
+This file describes the workflows that are used to compile the app, build the Docker image, scan it for vulnerabilities, and publish it to a container registry.
 
 Workflows are defined in the following files:
 - [build-test-push-azure-acr.yml](build-test-push-azure-acr.yml)
@@ -40,6 +40,7 @@ AWS_REGION - AWS region (e.g., us-east-1)
 ## Workflow Overview
 These workflows:
 - Build the application (e.g., using Maven)
+- Scan the built Docker image for vulnerabilities using Trivy before pushing
 - Push the Docker image to a container registry (Azure ACR or AWS ECR)
 - Update the GitOps repository with the new image tag for deployment
 

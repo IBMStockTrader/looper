@@ -22,7 +22,10 @@
     <packaging>pom</packaging>
 
     <name>StockTrader - looper</name>
-
+    <properties>
+           <sonar.organization>ibmstocktrader</sonar.organization>
+           <sonar.host.url>https://sonarcloud.io</sonar.host.url>
+    </properties>
     <modules> <!-- child modules to be executed as part of this build -->
         <module>client</module>
         <module>server</module>
